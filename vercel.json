@@ -1,0 +1,84 @@
+# SPECIEST Reading Companion — Vercel Deployment
+
+## Project structure
+
+```
+speciest-companion/
+├── api/
+│   └── chat.js        ← Serverless proxy (keeps your API key private)
+├── public/
+│   └── index.html     ← The reading companion app
+├── vercel.json        ← Vercel routing config
+└── .env.example       ← Shows which env variable to set
+```
+
+---
+
+## Deploy in 5 steps
+
+### 1. Create a GitHub repo
+- Go to github.com → New repository → name it `speciest-companion`
+- Upload this entire folder
+
+### 2. Import into Vercel
+- Go to vercel.com → Add New Project
+- Import your `speciest-companion` GitHub repo
+- Framework preset: **Other**
+- Click Deploy (it will fail the first time — that's OK, no API key yet)
+
+### 3. Add your API key
+- In Vercel dashboard → your project → **Settings → Environment Variables**
+- Add:
+  - Name: `ANTHROPIC_API_KEY`
+  - Value: `sk-ant-...` (your key from console.anthropic.com)
+  - Environment: Production ✓, Preview ✓
+- Click Save
+
+### 4. Redeploy
+- Vercel dashboard → Deployments → click the three dots → **Redeploy**
+- Your app will be live at `https://speciest-companion.vercel.app`
+
+### 5. Set your custom subdomain (optional but recommended)
+- Vercel → Settings → Domains → add `companion.lisapedrosa.com`
+- In Crazy Domains, add a CNAME record:
+  - Name: `companion`
+  - Value: `cname.vercel-dns.com`
+
+---
+
+## Add to lisapedrosa.com (WordPress/Elementor)
+
+Add this to any page using an HTML widget:
+
+```html
+<iframe 
+  src="https://companion.lisapedrosa.com" 
+  width="100%" 
+  height="900px" 
+  frameborder="0"
+  style="border:none;">
+</iframe>
+```
+
+Or link to it directly from your nav menu as a new page.
+
+---
+
+## Update allowed origins
+
+Once your Vercel URL is confirmed, open `api/chat.js` and update:
+
+```js
+const ALLOWED_ORIGINS = [
+  'https://lisapedrosa.com',
+  'https://www.lisapedrosa.com',
+  'https://speciest-companion.vercel.app',  // ← your actual URL
+];
+```
+
+---
+
+## Rate limits
+
+The proxy allows 20 requests per IP per minute by default.
+Adjust in `api/chat.js` — change `RATE_LIMIT` and `RATE_WINDOW`.
