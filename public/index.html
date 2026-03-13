@@ -143,7 +143,7 @@
     <div class="hero-rule"></div>
     <p class="hero-desc">Your guide to the deep. Navigate the characters, science, and philosophy of a world where consciousness has no species boundary.</p>
     <div class="hero-pills">
-      <span class="pill" onclick="scrollTo('companion')">Ask the Companion</span>
+      <span class="pill" onclick="document.getElementById('chat-input').scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>document.getElementById('chat-input').focus(),500)">Ask the Companion</span>
       <span class="pill" onclick="scrollTo('characters')">Meet the Characters</span>
     </div>
     <div class="hero-scroll-hint"><div class="scroll-line"></div><span class="scroll-label">Descend</span></div>
