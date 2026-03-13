@@ -130,10 +130,10 @@
   <nav id="nav">
     <div class="brand" onclick="scrollTo('hero')">Speciest</div>
     <ul class="nav-links">
+      <li><a onclick="scrollTo('companion')">Ask the Companion</a></li>
       <li><a onclick="scrollTo('characters')">Characters</a></li>
       <li><a onclick="scrollTo('glossary')">Lexicon</a></li>
       <li><a onclick="scrollTo('science')">The Science</a></li>
-      <li><a onclick="scrollTo('companion')">Ask the Companion</a></li>
     </ul>
   </nav>
   <div class="hero" id="hero">
@@ -143,11 +143,23 @@
     <div class="hero-rule"></div>
     <p class="hero-desc">Your guide to the deep. Navigate the characters, science, and philosophy of a world where consciousness has no species boundary.</p>
     <div class="hero-pills">
-      <span class="pill" onclick="scrollTo('characters')">Meet the Characters</span>
       <span class="pill" onclick="scrollTo('companion')">Ask the Companion</span>
+      <span class="pill" onclick="scrollTo('characters')">Meet the Characters</span>
     </div>
     <div class="hero-scroll-hint"><div class="scroll-line"></div><span class="scroll-label">Descend</span></div>
   </div>
+  <section id="companion" class="section band">
+    <div class="section-head"><span class="section-label">Grounded in the Actual Text</span><h2 class="section-title">Ask the Companion</h2><div class="section-rule"></div></div>
+    <div class="chat-wrap">
+      <p class="chat-intro">Ask anything about the SPECIEST trilogy — characters, scenes, philosophy, or the science beneath the story. The Companion searches the actual text to answer accurately.</p>
+      <div class="chat-box" id="chat-box"></div>
+      <div class="chat-input-row">
+        <input class="chat-input" id="chat-input" type="text" placeholder="Who is Ji-young Chung and what drives her?" maxlength="500">
+        <button class="chat-btn" id="chat-btn" onclick="send()">Send</button>
+      </div>
+      <div class="suggestions" id="suggestions"></div>
+    </div>
+  </section>
   <section id="characters" class="section">
     <div class="section-head"><span class="section-label">The Trilogy</span><h2 class="section-title">The Players</h2><div class="section-rule"></div></div>
     <div class="chars-grid" id="chars-grid"></div>
@@ -160,18 +172,6 @@
   <section id="science" class="section">
     <div class="section-head"><span class="section-label">Fiction Meets Reality</span><h2 class="section-title">The Science Behind the Story</h2><div class="section-rule"></div></div>
     <div class="sci-grid" id="sci-grid"></div>
-  </section>
-  <section id="companion" class="section band">
-    <div class="section-head"><span class="section-label">Grounded in the Actual Text</span><h2 class="section-title">Ask the Companion</h2><div class="section-rule"></div></div>
-    <div class="chat-wrap">
-      <p class="chat-intro">Ask anything about the SPECIEST trilogy — characters, scenes, philosophy, or the science beneath the story. The Companion searches the actual text to answer accurately.</p>
-      <div class="chat-box" id="chat-box"></div>
-      <div class="chat-input-row">
-        <input class="chat-input" id="chat-input" type="text" placeholder="Who is Ji-young Chung and what drives her?" maxlength="500">
-        <button class="chat-btn" id="chat-btn" onclick="send()">Send</button>
-      </div>
-      <div class="suggestions" id="suggestions"></div>
-    </div>
   </section>
   <footer><p>SPECIEST Trilogy · <a href="https://lisapedrosa.com">M.L. Pedrosa</a> · Reading Companion</p></footer>
 </div>
@@ -419,7 +419,7 @@ const observer = new IntersectionObserver(entries => {
     }
   });
 }, { threshold: 0.3 });
-['characters','glossary','science','companion'].forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+['companion','characters','glossary','science'].forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
 
 
 // ── INIT ──
@@ -431,4 +431,3 @@ setTimeout(() => {
 </script>
 </body>
 </html>
-
